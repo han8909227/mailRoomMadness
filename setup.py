@@ -8,6 +8,6 @@ setup(
     author_email='fortunato.maycotte@gmail.com',
     description='Emails to doners and organizes contributions',
     install_requires=[],
-    exrtras_require={'test': ['pytest', 'pytest-watch', 'pytest-cov', 'tox']},
+    exrtras_require={'test': ['pytest', 'pytest-watch', 'pytest-cov', 'tox', 'Faker']},
     entry_points={'console_scripts': []}
     )
