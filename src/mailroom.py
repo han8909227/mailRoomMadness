@@ -1,4 +1,4 @@
-""" . """
+"""."""
 
 
 def user_report(donor_dictionary):
@@ -9,8 +9,8 @@ def user_report(donor_dictionary):
         total_donated_amount = sum(donor_dictionary[donor])
         num_donation = len(donor_dictionary[donor])
         avg_donation = cal_avg_donation(donor_dictionary[donor])
-        print ('{} {} {} {}'.format(donor, total_donated_amount,
-               num_donation, avg_donation))
+        print ('{0:<20} {1:>6.2f} {3:^3} {4:>6.2f}'.format(donor,
+               total_donated_amount, num_donation, avg_donation))
 
 
 def cal_avg_donation(donations):
@@ -39,14 +39,16 @@ def send_thank_you(donor_list):
         if donation_input == 'quit':
             return
 
-        donor_list[name_input].append(float(donation_input))
+        donation_input = float(donation_input)
+
+        donor_list[name_input].append(donation_input)
         print (email_generator(name_input, donation_input))
 
 
 def email_generator(name, amount):
-    email_string = "Hi {}:\
-Thank you very much for your generous donation of ${:.2f}.\
-We appreciate your donation!!Cheers,Team".format(name, amount)
+    email_string = "Hi {}:\n\
+Thank you very much for your generous donation of ${:.2f}.\n\
+We appreciate your donation!!\nCheers,Team".format(name, amount)
     return email_string
 
 
