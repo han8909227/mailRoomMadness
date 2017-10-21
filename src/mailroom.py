@@ -7,6 +7,39 @@ form thank-you email. Enter 'quit' to exit script.
 """
 
 
+def main():  # pragma: no cover
+    """Ask to print a report or send a thank-you.
+
+    Will continue asking until the user types 'quit' to exit.
+    """
+    donor_dict = {}
+    print("""Welcome to the Mailroom
+
+You can choose to display a report of the donation statistics
+or to add a new donation and generate a thank-you email.
+
+Type 'quit' to return to the main menu or exit the program.""")
+    while True:
+        print("""
+Available options
+    1: Write Thank You
+    2: Create Report
+    'quit': Exit Program
+""")
+        user_choice = user_input_validator(validator_for_main,
+                                           'Choose an option: ')
+
+        if user_choice == 'quit':
+            print('Thanks for using Mailroom')
+            return
+
+        if user_choice == '1':
+            send_thank_you(donor_dict)
+
+        if user_choice == '2':
+            user_report(donor_dict)
+
+
 def user_report(donor_dict):
     """Print a table of donation stats.
 
@@ -28,6 +61,14 @@ def user_report(donor_dict):
                total_donated_amount, num_donation, avg_donation))
 
 
+def sort_donors(donor_dict):
+    """Sort the list of donors by total amount donated.
+
+    Returns a list of only the donors' names.
+    """
+    return sorted(list(donor_dict), key=lambda x: -sum(donor_dict[x]))
+
+
 def cal_avg_donation(donations):
     """Calculate the average given a list of donations."""
     if not donations:
@@ -35,7 +76,7 @@ def cal_avg_donation(donations):
     return sum(donations) / len(donations)
 
 
-def send_thank_you(donor_dict):
+def send_thank_you(donor_dict):  # pragma: no cover
     """Ask to print a list of donors or a thank-you email."""
     question = 'Enter a name or type \'list\' for a list of names: '
     name_input = user_input_validator(validator_for_thank_you, question)
@@ -44,6 +85,8 @@ def send_thank_you(donor_dict):
         return
 
     if name_input.lower() == 'list':
+        if not donor_dict:
+            print('No donors recorded.')
         for name in list(donor_dict):
             print(name)
     else:
@@ -59,7 +102,7 @@ def send_thank_you(donor_dict):
         donation_input = float(donation_input)
 
         donor_dict[name_input].append(donation_input)
-        print (email_generator(name_input, donation_input))
+        print ('\n' + email_generator(name_input, donation_input))
 
 
 def email_generator(name, amount):
@@ -70,15 +113,7 @@ We appreciate your donation!!\nCheers,\nTeam".format(name, amount)
     return email_string
 
 
-def sort_donors(donor_dict):
-    """Sort the list of donors by total amount donated.
-
-    Returns a list of only the donors' names.
-    """
-    return sorted(list(donor_dict), key=lambda x: -sum(donor_dict[x]))
-
-
-def user_input_validator(validator, question):
+def user_input_validator(validator, question):  # pragma: no cover
     """Validate a user input until it passes a validator function.
 
     validator: function, test for user input. Returns a truthy
@@ -88,7 +123,7 @@ def user_input_validator(validator, question):
     user_input = input(question)
 
     while not validator(user_input) and user_input.lower() != 'quit':
-        print('Invalid user input,  input again')
+        print('Invalid user input, input again\n')
         user_input = input(question)
     return user_input
 
@@ -109,9 +144,12 @@ def validator_for_thank_you(name_input):
 
 
 def validator_for_thank_you_donation(donation_input):
-    """Check that input can be a float."""
+    """Check that input can be a ."""
     try:
         float(donation_input)
         return True
     except ValueError:
         return False
+
+if __name__ == '__main__':
+    main()

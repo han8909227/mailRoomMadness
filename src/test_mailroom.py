@@ -15,7 +15,7 @@ small_donors = {
 }
 
 
-@pytest.mark.parametrize('donor_dictionary', [(small_donors)])
+@pytest.mark.parametrize('donor_dictionary', [small_donors, fake_donors])
 def test_generate_user_report(donor_dictionary):
     """Test that user_input does not raise any exceptions."""
     from mailroom import user_report
