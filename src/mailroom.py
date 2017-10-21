@@ -9,7 +9,7 @@ def user_report(donor_dictionary):
         total_donated_amount = sum(donor_dictionary[donor])
         num_donation = len(donor_dictionary[donor])
         avg_donation = cal_avg_donation(donor_dictionary[donor])
-        print ('{0:<20} {1:>6.2f} {3:^3} {4:>6.2f}'.format(donor,
+        print ('{0:<20} {1:>6.2f} {2:^3} {3:>6.2f}'.format(donor,
                total_donated_amount, num_donation, avg_donation))
 
 
