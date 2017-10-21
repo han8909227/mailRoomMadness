@@ -33,17 +33,21 @@ def send_thank_you(donor_list):
     else:
         if name_input not in donor_list:
             donor_list[name_input] = []
-        donation_input = input('Enter a donation amount')
 
-        donation_input = user_input_validate(donation_input, validator_for_thank_you_donation, 'Enter a donation amount')
+        donation_input = user_input_validator(validator_for_thank_you_donation, 'Enter a donation amount')
 
         if donation_input == 'quit':
             return
 
         donor_list[name_input].append(float(donation_input))
-        email_string = """email""".format(donation_input)
-        print (email_string)
+        print (email_generator(name_input, donation_input))
 
+
+def email_generator(name, amount):
+    email_string = "Hi {}:\
+Thank you very much for your generous donation of ${:.2f}.\
+We appreciate your donation!!Cheers,Team".format(name, amount)
+    return email_string
 
 
 def sort_donors(donor_dictionary):

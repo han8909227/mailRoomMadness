@@ -47,3 +47,11 @@ def test_validator_thank_you(user_input, result):
 def test_validator_thank_you_donation(user_input, result):
     from mailroom import validator_for_thank_you_donation
     assert validator_for_thank_you_donation(user_input) == result
+
+
+@pytest.mark.parametrize('name, amount, result', [('John', 20000, 'Hi John:\
+Thank you very much for your generous donation of $20000.00.\
+We appreciate your donation!!Cheers,Team')])
+def test_email_generator(name, amount, result):
+    from mailroom import email_generator
+    assert email_generator(name, amount) == result
