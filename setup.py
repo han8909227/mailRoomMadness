@@ -9,5 +9,5 @@ setup(
     description='Emails to donors and organizes contributions',
     install_requires=[],
     extras_require={'test': ['pytest', 'pytest-watch', 'pytest-cov', 'tox', 'Faker']},
-    entry_points={'console_scripts': []}
+    entry_points={'console_scripts': ['mailroom = mailroom:main']}
 )
