@@ -146,10 +146,10 @@ def validator_for_thank_you(name_input):
 def validator_for_thank_you_donation(donation_input):
     """Check that input can be a ."""
     try:
-        float(donation_input)
-        return True
+        num = float(donation_input)
+        return num > 0
     except ValueError:
         return False
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     main()

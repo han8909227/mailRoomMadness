@@ -54,7 +54,8 @@ def test_validator_thank_you(user_input, result):
     assert validator_for_thank_you(user_input) == result
 
 
-@pytest.mark.parametrize('user_input, result', [('100.22336', True),
+@pytest.mark.parametrize('user_input, result', [('0', False), ('-10', False),
+                         ('-10.32', False), ('100.22336', True),
                          ('20', True), ('', False), ('letter', False),
                          ('***', False)])
 def test_validator_thank_you_donation(user_input, result):
